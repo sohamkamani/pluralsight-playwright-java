@@ -1,0 +1,117 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------< com.pluralsight:pluralsight-playwright-java >-------------
+[INFO] Building pluralsight-playwright-java 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.1.0:clean (default-clean) @ pluralsight-playwright-java ---
+[INFO] Deleting /Users/soham/src/gitlab.com/sohamkamani/pluralsight-playwright-java/target
+[INFO] 
+[INFO] --- resources:3.0.2:resources (default-resources) @ pluralsight-playwright-java ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/soham/src/gitlab.com/sohamkamani/pluralsight-playwright-java/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.10.1:compile (default-compile) @ pluralsight-playwright-java ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /Users/soham/src/gitlab.com/sohamkamani/pluralsight-playwright-java/target/classes
+[INFO] 
+[INFO] --- exec:3.4.1:java (default-cli) @ pluralsight-playwright-java ---
+webkit17.4
+[WARNING] 
+com.microsoft.playwright.PlaywrightException: Error {
+  message='Could not connect to the server.
+  name='Error
+  stack='Error: Could not connect to the server.
+    at FrameManager.frameAbortedNavigation (/private/var/folders/19/1qyg25b13yb87s67gzs0_b140000gn/T/playwright-java-10659432880348691272/package/lib/server/frames.js:216:14)
+    at FrameManager.requestFailed (/private/var/folders/19/1qyg25b13yb87s67gzs0_b140000gn/T/playwright-java-10659432880348691272/package/lib/server/frames.js:276:12)
+    at WKPage._onLoadingFailed (/private/var/folders/19/1qyg25b13yb87s67gzs0_b140000gn/T/playwright-java-10659432880348691272/package/lib/server/webkit/wkPage.js:1124:30)
+    at WKSession.<anonymous> (/private/var/folders/19/1qyg25b13yb87s67gzs0_b140000gn/T/playwright-java-10659432880348691272/package/lib/server/webkit/wkPage.js:391:2930)
+    at WKSession.emit (node:events:519:28)
+    at /private/var/folders/19/1qyg25b13yb87s67gzs0_b140000gn/T/playwright-java-10659432880348691272/package/lib/server/webkit/wkConnection.js:169:41
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at process.processImmediate (node:internal/timers:449:9)
+}
+Call log:
+- navigating to "http://localhost:8000/catalog.html", waiting until "load"
+
+    at com.microsoft.playwright.impl.WaitableResult.get (WaitableResult.java:56)
+    at com.microsoft.playwright.impl.ChannelOwner.runUntil (ChannelOwner.java:120)
+    at com.microsoft.playwright.impl.Connection.sendMessage (Connection.java:130)
+    at com.microsoft.playwright.impl.ChannelOwner.sendMessage (ChannelOwner.java:106)
+    at com.microsoft.playwright.impl.FrameImpl.navigateImpl (FrameImpl.java:463)
+    at com.microsoft.playwright.impl.PageImpl.lambda$navigate$46 (PageImpl.java:932)
+    at com.microsoft.playwright.impl.LoggingSupport.withLogging (LoggingSupport.java:47)
+    at com.microsoft.playwright.impl.ChannelOwner.withLogging (ChannelOwner.java:89)
+    at com.microsoft.playwright.impl.PageImpl.navigate (PageImpl.java:932)
+    at com.microsoft.playwright.impl.PageImpl.navigate (PageImpl.java:42)
+    at com.microsoft.playwright.Page.navigate (Page.java:5504)
+    at com.pluralsight.App.getTitle (App.java:30)
+    at com.pluralsight.App.main (App.java:18)
+    at org.codehaus.mojo.exec.ExecJavaMojo.doMain (ExecJavaMojo.java:358)
+    at org.codehaus.mojo.exec.ExecJavaMojo.doExec (ExecJavaMojo.java:347)
+    at org.codehaus.mojo.exec.ExecJavaMojo.lambda$execute$0 (ExecJavaMojo.java:269)
+    at java.lang.Thread.run (Thread.java:1570)
+Caused by: com.microsoft.playwright.impl.DriverException: Error {
+  message='Could not connect to the server.
+  name='Error
+  stack='Error: Could not connect to the server.
+    at FrameManager.frameAbortedNavigation (/private/var/folders/19/1qyg25b13yb87s67gzs0_b140000gn/T/playwright-java-10659432880348691272/package/lib/server/frames.js:216:14)
+    at FrameManager.requestFailed (/private/var/folders/19/1qyg25b13yb87s67gzs0_b140000gn/T/playwright-java-10659432880348691272/package/lib/server/frames.js:276:12)
+    at WKPage._onLoadingFailed (/private/var/folders/19/1qyg25b13yb87s67gzs0_b140000gn/T/playwright-java-10659432880348691272/package/lib/server/webkit/wkPage.js:1124:30)
+    at WKSession.<anonymous> (/private/var/folders/19/1qyg25b13yb87s67gzs0_b140000gn/T/playwright-java-10659432880348691272/package/lib/server/webkit/wkPage.js:391:2930)
+    at WKSession.emit (node:events:519:28)
+    at /private/var/folders/19/1qyg25b13yb87s67gzs0_b140000gn/T/playwright-java-10659432880348691272/package/lib/server/webkit/wkConnection.js:169:41
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at process.processImmediate (node:internal/timers:449:9)
+}
+Call log:
+- navigating to "http://localhost:8000/catalog.html", waiting until "load"
+
+    at com.microsoft.playwright.impl.Connection.dispatch (Connection.java:259)
+    at com.microsoft.playwright.impl.Connection.processOneMessage (Connection.java:211)
+    at com.microsoft.playwright.impl.ChannelOwner.runUntil (ChannelOwner.java:118)
+    at com.microsoft.playwright.impl.Connection.sendMessage (Connection.java:130)
+    at com.microsoft.playwright.impl.ChannelOwner.sendMessage (ChannelOwner.java:106)
+    at com.microsoft.playwright.impl.FrameImpl.navigateImpl (FrameImpl.java:463)
+    at com.microsoft.playwright.impl.PageImpl.lambda$navigate$46 (PageImpl.java:932)
+    at com.microsoft.playwright.impl.LoggingSupport.withLogging (LoggingSupport.java:47)
+    at com.microsoft.playwright.impl.ChannelOwner.withLogging (ChannelOwner.java:89)
+    at com.microsoft.playwright.impl.PageImpl.navigate (PageImpl.java:932)
+    at com.microsoft.playwright.impl.PageImpl.navigate (PageImpl.java:42)
+    at com.microsoft.playwright.Page.navigate (Page.java:5504)
+    at com.pluralsight.App.getTitle (App.java:30)
+    at com.pluralsight.App.main (App.java:18)
+    at org.codehaus.mojo.exec.ExecJavaMojo.doMain (ExecJavaMojo.java:358)
+    at org.codehaus.mojo.exec.ExecJavaMojo.doExec (ExecJavaMojo.java:347)
+    at org.codehaus.mojo.exec.ExecJavaMojo.lambda$execute$0 (ExecJavaMojo.java:269)
+    at java.lang.Thread.run (Thread.java:1570)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.090 s
+[INFO] Finished at: 2024-08-28T21:49:35+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.4.1:java (default-cli) on project pluralsight-playwright-java: An exception occurred while executing the Java class. Error {
+[ERROR]   message='Could not connect to the server.
+[ERROR]   name='Error
+[ERROR]   stack='Error: Could not connect to the server.
+[ERROR]     at FrameManager.frameAbortedNavigation (/private/var/folders/19/1qyg25b13yb87s67gzs0_b140000gn/T/playwright-java-10659432880348691272/package/lib/server/frames.js:216:14)
+[ERROR]     at FrameManager.requestFailed (/private/var/folders/19/1qyg25b13yb87s67gzs0_b140000gn/T/playwright-java-10659432880348691272/package/lib/server/frames.js:276:12)
+[ERROR]     at WKPage._onLoadingFailed (/private/var/folders/19/1qyg25b13yb87s67gzs0_b140000gn/T/playwright-java-10659432880348691272/package/lib/server/webkit/wkPage.js:1124:30)
+[ERROR]     at WKSession.<anonymous> (/private/var/folders/19/1qyg25b13yb87s67gzs0_b140000gn/T/playwright-java-10659432880348691272/package/lib/server/webkit/wkPage.js:391:2930)
+[ERROR]     at WKSession.emit (node:events:519:28)
+[ERROR]     at /private/var/folders/19/1qyg25b13yb87s67gzs0_b140000gn/T/playwright-java-10659432880348691272/package/lib/server/webkit/wkConnection.js:169:41
+[ERROR]     at runNextTicks (node:internal/process/task_queues:60:5)
+[ERROR]     at process.processImmediate (node:internal/timers:449:9)
+[ERROR] }
+[ERROR] Call log:
+[ERROR] - navigating to "http://localhost:8000/catalog.html", waiting until "load"
+[ERROR] 
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
