@@ -11,6 +11,7 @@ public class Solution {
     try (Playwright playwright = Playwright.create()) {
       // task 1
       Browser browser = playwright.webkit().launch();
+
       System.out.println(browser.browserType().name() + browser.version());
 
       getTitle(browser);

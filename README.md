@@ -16,7 +16,7 @@ Links:
 
 ## Introduction and set up
 
-In this section, we will set up the project and install the necessary dependencies that we need to run Playwright with Java.
+In this section, you'll set up the project and install the necessary dependencies that you need to run Playwright with Java.
 
 Playwright is a Java library that allows you to write end-to-end tests and automation for web applications. 
 
@@ -28,10 +28,37 @@ To run the application code at any time, execute:
 mvn clean compile exec:java -Dexec.mainClass="com.pluralsight.App" -Dexec.classpathScope=runtime
 ```
 
-We will be testing a locally hosted web application that you can view in the Web page tab (second ab). The website is being served on `localhost:8080`. All the HTML files are in the `website` folder, which you can go through to understand the structure of the website.
+And if you need some help, or want to see the working solution code, you can view the `src/main/java/com/pluralsight/Solution.java` file.
+
+You will be testing a locally hosted web application that you can view in the Web page tab (second tab). The website is being served on `localhost:8080`. All the HTML files are in the `website` folder, which you can go through to understand the structure of the website.
 
 You can open the web browser tab, and navigate to `localhost:8080/website/catalog.html` to see one of the web pages.
 
+The `App.java` file has some boilerplate code to get you started. Within the main method, you will see a `try` block that creates a new Playwright instance:
+
+```java
+try (Playwright playwright = Playwright.create()) {
+    ...
+}
+```
+
+You can use this `playwright` instance for all future tasks. This is the entry point for all Playwright operations.
+
+You can create different browser instances using the `playwright` instance. You can create instances for different browsers like `chromium`, `firefox`, or `webkit`:
+
+```java
+Browser browser = playwright.webkit().launch();
+Browser browser = playwright.chromium().launch();
+Browser browser = playwright.firefox().launch();
+```
+
+If you already have a `Browser` instance, you can check information about the browser using the `name` and `browser.version`, and other methods:
+
+```java
+String browserName = browser.browserType().name();
+String browserVersion = browser.version();
+String browserBinary = browser.browserType().executablePath();
+```
 
 
 ### Task - Create a new Playwright instance
@@ -47,17 +74,41 @@ Hint: You can see the official Playwright documentation for Java [here](https://
 When writing end-to-end tests, you will need to find and locate particular elements on the web page. 
 This could be to verify their content, interact with them, or check their attributes. 
 
-Playwright allows you to locate elements using an already-familiar CSS selector syntax. For example:
+The abstraction for web pages in Playwright is the `Page` class. And you can create a new page instance using the `browser.newPage()` method:
 
 ```java
+Page page = browser.newPage();
+```
+
+You can think of a `Page` as a representation of a web page in the browser. You can use this `Page` instance to interact with the page, navigate to different URLs, and locate elements on the page.
+
+Playwright allows you to locate elements and other attributes using an already-familiar CSS selector syntax. For example:
+
+```java
+// Navigates to a particular URL
 page.navigate("http://localhost:8080/website/catalog.html");
+// Get the title of the current page
+String title = page.title();
+// Get the current URL of the page
+String url = page.url();
+// Locate all elements with the class "some-class"
 List<Locator> elements = page.locator(".some-class").all()
 ```
 
-This code snippet will navigate to the `catalog.html` page and locate all elements with the class `some-class`, which will be stored in the `elements` list.
+This code snippet will navigate to the `catalog.html` page and locate all elements with the class `some-class`, which will be stored in the `elements` list. 
 
+The `Locator` class is a representation of an element on the page. You can use the `Locator` instance to interact with the element, get its attributes, or check its state.
 
->You can see the [documentation on locators](https://playwright.dev/java/docs/locators#locate-by-css-or-xpath) for more details on the different ways you can locate elements.
+```java
+// Get the inner text of a Locator
+String innerText = page.locator(".some-class").first().innerText();
+// Get the value of the `href` attribute of a Locator
+String href = page.locator("a").first().getAttribute("href");
+```
+
+The `first()` method of the `Locator` class returns the first element in the list of elements that match the selector. You can use this method to interact with the first element that matches the selector. On the other hand, the `all()` method returns a list of all elements that match the selector.
+
+>Remember, the text within the `page.locator` method is a CSS selector. You can use any valid CSS selector to locate elements on the page.
 
 ### Task 2 - Locate title on the page
 
@@ -78,9 +129,13 @@ Playwright allows you to interact with elements in the same way a user would, so
 page.locator("a").first().click();
 // fill in the input field with the label "Birth date"
 page.getByLabel("Birth date").fill("2020-02-02");
+// Check a checkbox
+page.locator("input[type='checkbox']").check();
+// Select an option from a dropdown, whose value is "option-value"
+page.locator("select").selectOption("option-value");
 ```
 
-You can see the [documentation on actions](https://playwright.dev/docs/input) to know more about the different kinds of interactions you can perform.
+Now, lets add some code to interact with different elements within the Globotickets website, and inspect the new state of the page once you complete the interaction.
 
 ### Task 4 - Click on an element
 
@@ -112,12 +167,14 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 // check if the page title is "Home"
 assertThat(page.title()).isEqualTo("Home");
 // check if the element with the class "some-class" is visible
-assertThat(page.locator(".some-class").first().isVisible()).isTrue();
+assertThat(page.locator(".some-class").first()).isVisible();
+// check if an element has a particular CSS property
+assertThat(page.locator("p").first()).hasCSS("font-size", "16px");
 ```
 
 An assertion will throw an exception if the condition is not met. For this reason, assertions are mainly used in tests to verify that the application behaves as expected.
 
-To see this in action, let's add some assertions to our code. We'll make use of assertions to check the visibility of an element in the browser, and the appearance of an element through its CSS properties.
+To see this in action, let's add some assertions to the code. You'll make use of assertions to check the visibility of an element in the browser, and the appearance of an element through its CSS properties.
 
 ### Task 6 - Assert the visibility of an element
 
